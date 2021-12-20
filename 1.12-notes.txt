@@ -1,0 +1,55 @@
+- All numbers at edges are 1
+- Next number is the sum of the two in the row above it
+- Must be recursive process
+- We have not used arrays yet
+
+- Could represent the numbers as rows and columns
+
+1 = 1
+2 = 1 1
+3 = 1 2 1
+4 = 1 3 3 1
+5 = 1 4 6 4 1
+6 = 1 5 10 10 5 1
+
+- Should not work with negative ints or zero
+- May need to look at formatting strings
+
+e.g.
+pas(1) 
+1
+pas(3)
+1
+1 1
+1 2 1
+
+Given an integer n, generate n many rows, where the first and last columns of each row are 1, and the other elements are the sum of two numbers in the row above, i.e. row-1: col:(+ previous current)
+
+track n; will start at n and will subtract 1 in each recursive call until it reaches 1
+track row and col; row is equivalent to n, col is is independent
+given n
+if col == 1 or n (the last element, as each row has n columns): 1
+else: col 2 = sumTwoColPrevRow(n-1, col)
+
+sumTwo(n-1, col):
+if col == 1 or n, 1
+else sumTwo()
+
+if c == 1 or r, return 1
+else nextElem(r c)
+
+nextElem(r c):
+if r <= 1, 1 + nextElem(r c)
+else nextElem(r c) + nextElem(r c)
+r-1
+else 
+
+What I will need:
+- outputs nth row of pascals triangle
+  - a function that recursively calculates each element
+    - element is 1 when col is 1 or n, otherwise it's defined by the sum of col current + col previous on row n-1
+      - thus this row needs to be calculated
+      - calc row by the parent function
+- This is obviously going to be an inefficient function, as it computes half the triangle each time it calculates a single element
+- A better approach would be to count up from row 1 to the desired row and to refer to a record of the triangle
+- Limitation is that we can't use arrays, which means we can't keep a record of the triangle, so we are stuck with this function
