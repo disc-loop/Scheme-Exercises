@@ -140,4 +140,12 @@
 ;(eqal? 2 2)
 ;(eqal? "he" "ha")
 
+(define rember
+  (lambda (s l)
+    (cond ((null? l) (quote ()))
+          ((eqal? (car l) s) (cdr l))
+          (else (cons (car l) (rember s (cdr l)))))))
+
+(rember "dog" animals) 
+
           
