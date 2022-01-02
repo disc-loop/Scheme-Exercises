@@ -30,7 +30,7 @@
 
 ; Make sure to have spaces between the nums
 (define axpr '(2 + (5 * (3 ^ 2))))
-(numbered? axpr)
+;(numbered? axpr)
 
 ; value returns the natural value of a numbered arithmetic expression
 ; Questions first, structure later
@@ -45,7 +45,14 @@
 
 (define value
   (lambda (nexp)
-    (cond ((atom? nexp) )
-          ((eq? (car (cdr nexp)) (quote +)) )
-          ((eq? (car (cdr nexp)) (quote *)) )
-          (else ))))
+    (cond ((atom? nexp) nexp)
+          ((eq? (car (cdr nexp)) (quote +)) 
+           (+ (car nexp) 
+              (value (car (cdr (cdr nexp))))))
+          ((eq? (car (cdr nexp)) (quote *))
+           (* (car nexp) 
+              (value (car (cdr (cdr nexp))))))
+          (else (expt (value (car nexp)) (value (car (cdr (cdr nexp)))))))))
+;(value 1)
+;(value '(2 + 1))
+;(value '(2 + (3 ^ (5 * 2))))
